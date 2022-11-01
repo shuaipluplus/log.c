@@ -127,6 +127,25 @@ int log_add_fp(FILE *fp, int level) {
   return log_add_callback(file_callback, fp, level);
 }
 
+/**
+ * @brief delete fp from list, for reopen log files to rotate logs
+ * 
+ * @param fp 
+ * @return int 
+ */
+int log_del_fp (FILE *fp) {
+  for (int i = 0; i < MAX_CALLBACKS; i++) {
+    if (!L.callbacks[i].fn) {
+      if (L.callbacks[i].udata == fp) {
+        L.callbacks[i].level = 0;
+        L.callbacks[i].udata = NULL;
+        L.callbacks[i].fn = NULL;
+        return 0;
+      }
+    }
+  }
+  return -1;
+}
 
 static void init_event(log_Event *ev, void *udata) {
   if (!ev->time) {
