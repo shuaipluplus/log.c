@@ -85,4 +85,4 @@ the terms of the MIT license. See [LICENSE](LICENSE) for details.
 
 ----
 ## What's new
-Add log_del_fp() to use logroate to reopen the file.
+Add log_del_fp() to use logrotate to reopen the file.
